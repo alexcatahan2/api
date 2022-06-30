@@ -1,7 +1,4 @@
 #every model represnts a table in our databse
-from enum import unique
-from tkinter import CASCADE
-from psycopg2 import Timestamp
 from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, text
 from .database import Base
 from sqlalchemy.orm import relationship
