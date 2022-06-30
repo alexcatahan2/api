@@ -31,7 +31,7 @@ def create_acces_token(data: dict):
 
 def verify_access_token(token:str, credentials_exception):
   try:  #this decode function will raise an exception if the signature is wrong
-    payload = jwt.decode(token, SECRET_KEY, [ALGORITHM]) #this is decoding the token that was supplied by client to then vdrify it
+    payload = jwt.decode(token, SECRET_KEY, ALGORITHM) #this is decoding the token that was supplied by client to then vdrify it
     #this puts all of the payload data from the token into the variable payload^
     
     extracted_id:str = payload.get("user_id") #gets the specific data that we want from the token, in this case our desired data is called users_id
