@@ -18,7 +18,7 @@ itll go through the middleware which will perform an operation
 origins =["*"]
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=origins, #specify the origins we want to allow/ what domains do we want to be able to talk to our api
+  allow_origins="*", #specify the origins we want to allow/ what domains do we want to be able to talk to our api
   allow_credentials=True, 
   allow_methods=["*"], #we can allow only specific http methods, for example if we only wanted clients to retrieve data from our api we could only allow get requests
   allow_headers=["*"] #we can allow specific headers
