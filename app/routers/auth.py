@@ -21,6 +21,12 @@ def login_user(user_credentials : OAuth2PasswordRequestForm = Depends(), db: Ses
   #create a token, then return the token
 
   access_token = oauth2.create_acces_token(data = {"user_id": login_attempt.id})
-  return {"access_token": access_token, "token_type" : "bearer", "user" : user_credentials.username}
+  
+  user = {'email' : login_attempt.email, 
+          'firstName':login_attempt.firstName, 
+          'lastName' : login_attempt.lastName, 
+          'id': login_attempt.id,
+          "created_at": login_attempt.created_at}
+  return {"access_token": access_token, "token_type" : "bearer", 'user': user}
   
   
