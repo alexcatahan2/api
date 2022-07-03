@@ -13,6 +13,9 @@ from typing import Optional
 class UserCreate(BaseModel):
   email:EmailStr
   password:str
+  firstName:str
+  lastName:str
+  
 
 class UserReturn(BaseModel):
   id:int
