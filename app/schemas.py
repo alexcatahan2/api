@@ -15,12 +15,14 @@ class UserCreate(BaseModel):
   password:str
   firstName:str
   lastName:str
-  
+
 
 class UserReturn(BaseModel):
   id:int
   email: EmailStr
   created_at: datetime
+  firstName:str
+  lastName:str
 
   class Config:
     orm_mode = True
