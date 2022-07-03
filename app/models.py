@@ -25,6 +25,8 @@ class User(Base):
   password = Column(String, nullable = False)
   id = Column(Integer, primary_key = True, nullable = False)
   created_at = Column(TIMESTAMP(timezone = True), nullable = False, server_default = ('now()'))
+  firstName = Column(String, nullable = False, server_default = "first name")
+  lastName = Column(String, nullable = False, server_default = "last name")
 
 class Vote(Base):
   __tablename__ = "votes"
