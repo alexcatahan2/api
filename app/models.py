@@ -27,7 +27,7 @@ class User(Base):
   created_at = Column(TIMESTAMP(timezone = True), nullable = False, server_default = ('now()'))
   firstName = Column(String, nullable = False, server_default = "first name")
   lastName = Column(String, nullable = False, server_default = "last name")
-
+  
 class Vote(Base):
   __tablename__ = "votes"
   post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key = True)
