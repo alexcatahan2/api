@@ -26,6 +26,8 @@ def get_user(id: int, db : Session = Depends(get_db)):
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
   #create hash of password- user.password
   #reference the password conext where we defined bcrypt as out hashing algorithm
+  if db.query(models.User).filter(models.User.email == user.email).first():
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail = "account with that email already exists")
   user.password = utils.hash(user.password) #this updates the pydantic model of the user, gotten from the body (in postgres for now) to be the hashed password
   created_user = models.User(**user.dict())
   db.add(created_user)
