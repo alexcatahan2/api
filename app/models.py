@@ -1,5 +1,6 @@
 #every model represnts a table in our databse
-from sqlalchemy import TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, text
+from tkinter import CASCADE
+from sqlalchemy import TIME, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, text, DATE
 from .database import Base
 from sqlalchemy.orm import relationship
 
@@ -27,12 +28,29 @@ class User(Base):
   created_at = Column(TIMESTAMP(timezone = True), nullable = False, server_default = ('now()'))
   firstName = Column(String, nullable = False, server_default = "first name")
   lastName = Column(String, nullable = False, server_default = "last name")
-  
+
 class Vote(Base):
   __tablename__ = "votes"
   post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key = True)
   liked_post = relationship("Post")
-
   user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), primary_key = True)
   user_liked = relationship("User")
-  
+
+class Workout(Base):
+  __tablename__ = "workouts"
+  id = Column(Integer, primary_key = True, nullable = False)
+  user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable = False)
+  start = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
+  stop = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
+  length = Column(Integer, nullable = False, server_default = "0")
+  date = Column(DATE, nullable = False, server_default = ("CURRENT_DATE"))
+
+class Exercise(Base):
+  __tablename__ = "exercises"
+  exercise_id = Column(Integer, nullable = False, primary_key = True)
+  workout_id = Column(Integer, ForeignKey("workouts.id", ondelete="CASCADE"), nullable = False)
+  type = Column(String, nullable = False, server_default = "exercise")
+  repititions = Column(Integer, nullable = False, server_default = "10")
+  weight = Column(Integer, nullable = False)
+  start = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
+  stop = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
