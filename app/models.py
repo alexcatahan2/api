@@ -1,5 +1,4 @@
 #every model represnts a table in our databse
-from tkinter import CASCADE
 from sqlalchemy import TIME, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, text, DATE
 from .database import Base
 from sqlalchemy.orm import relationship
