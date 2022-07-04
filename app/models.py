@@ -48,6 +48,7 @@ class Exercise(Base):
   __tablename__ = "exercises"
   exercise_id = Column(Integer, nullable = False, primary_key = True)
   workout_id = Column(Integer, ForeignKey("workouts.id", ondelete="CASCADE"), nullable = False)
+  user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable = False)
   type = Column(String, nullable = False, server_default = "exercise")
   repititions = Column(Integer, nullable = False, server_default = "10")
   weight = Column(Integer, nullable = False)

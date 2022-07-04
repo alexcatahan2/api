@@ -1,9 +1,11 @@
 #put schemas here just so we dont clutter up our main.py file
-from datetime import datetime
+from datetime import datetime, time, date
 from optparse import Option
 from xmlrpc.client import boolean
 from pydantic import BaseModel, EmailStr, conint
 from typing import Optional
+
+from sqlalchemy import Date, Time
 # #define post schema
 # class Post(BaseModel):
 #   title:str
@@ -76,3 +78,37 @@ class VoteReturn(Vote):
 
   class Config:
     orm_mode = True #we incldue this because the liked_post we want to format and return is recieved as a orm_model
+
+class Workout(BaseModel):
+  user_id: int
+  start: time
+  stop:time
+  length:int 
+  workout_id:int
+  date: date
+
+class WorkoutCreate(BaseModel):
+  start: time
+  stop: time
+  length: int
+
+  class Config:
+    orm_mode = True
+
+class Exercise(BaseModel):
+  exercise_id: int
+  workout_id : int
+  user_id : int
+  type : str
+  repititions: int
+  weight: int
+  start : time
+  stop: time
+
+class ExerciseCreate(BaseModel):
+  workout_id : int
+  type : str
+  repititions: int
+  weight: int
+  start : time
+  stop: time

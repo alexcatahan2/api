@@ -7,7 +7,7 @@ from .database import engine
 
 #import the routers to get access to our path routes
 #we put our path routes into different locations so our main isn't as big
-from .routers import post, user, auth, vote #import the post.py and users.py from our routers folder
+from .routers import post, user, auth, vote, workout, exercise #import the post.py and users.py from our routers folder
 app = FastAPI()
 
 #middleware is basically a function that runs before every request
@@ -77,6 +77,10 @@ app.include_router(user.router) #grabs the router object from the user file whic
 app.include_router(auth.router)
 
 app.include_router(vote.router)
+
+app.include_router(workout.router)
+
+app.include_router(exercise.router)
 #This is called a path oepration or route:made up of two components
 @app.get("/")     #declarator? magic that turns it into a path operation so someone can hit this endpoint
 async def root():     #function 
