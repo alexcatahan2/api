@@ -20,8 +20,8 @@ depends_on = None
 def upgrade() -> None:
     op.create_table("workouts", 
                     sa.Column('id', sa.Integer(), nullable = False, primary_key = True),
-                    sa.Column('start', sa.TIMESTAMP(timezone=True), nullable = False, server_default = sa.text('now()')),
-                    sa.Column('stop', sa.TIMESTAMP(timezone=True), nullable = False, server_default = sa.text('now()')), 
+                    sa.Column('start', sa.Time(), nullable = False, server_default = sa.text('now()')),
+                    sa.Column('stop', sa.Time(), nullable = False, server_default = sa.text('now()')), 
                     sa.Column('length', sa.Integer(), nullable = False, server_default= '0'),
                     sa.Column('date', sa.Date(), nullable = False, server_default = sa.text('CURRENT_DATE')),
                     sa.Column('user_id', sa.Integer, nullable = False))
@@ -31,8 +31,8 @@ def upgrade() -> None:
                     sa.Column('type', sa.String(), nullable = False, server_default = 'exercise'),
                     sa.Column('repititions', sa.Integer(), nullable = False, server_default = '10'),
                     sa.Column('weight', sa.Integer(), nullable = False),
-                    sa.Column('start', sa.TIMESTAMP(timezone=True), nullable = False, server_default= sa.text('now()')),
-                    sa.Column('stop', sa.TIMESTAMP(timezone=True), nullable = False, server_default= sa.text('now()')))   
+                    sa.Column('start', sa.Time(), nullable = False, server_default= sa.text('now()')),
+                    sa.Column('stop', sa.Time(), nullable = False, server_default= sa.text('now()')))   
     op.create_foreign_key('workouts_users_fk', source_table='workouts', referent_table='users',
                             local_cols=['user_id'], remote_cols=['id'], ondelete="CASCADE")
     op.create_foreign_key('exercises_workouts_fk', source_table='exercises', referent_table='workouts',
