@@ -34,7 +34,7 @@ def upgrade() -> None:
                     sa.Column('start', sa.TIMESTAMP(timezone=True), nullable = False, server_default= sa.text('now()')),
                     sa.Column('stop', sa.TIMESTAMP(timezone=True), nullable = False, server_default= sa.text('now()')))   
     op.create_foreign_key('workouts_users_fk', source_table='workouts', referent_table='users',
-                            local_cols=['users_id'], remote_cols=['id'], ondelete="CASCADE")
+                            local_cols=['user_id'], remote_cols=['id'], ondelete="CASCADE")
     op.create_foreign_key('exercises_workouts_fk', source_table='exercises', referent_table='workouts',
                             local_cols=['workout_id'], remote_cols=['id'], ondelete="CASCADE")
  
