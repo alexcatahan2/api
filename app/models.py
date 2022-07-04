@@ -1,5 +1,5 @@
 #every model represnts a table in our databse
-from sqlalchemy import TIME, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, text, DATE
+from sqlalchemy import TIME, TIMESTAMP, Column, ForeignKey, Integer, String, Boolean, Time, text, DATE
 from .database import Base
 from sqlalchemy.orm import relationship
 
@@ -39,8 +39,8 @@ class Workout(Base):
   __tablename__ = "workouts"
   id = Column(Integer, primary_key = True, nullable = False)
   user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable = False)
-  start = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
-  stop = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
+  start = Column(Time, nullable = False, server_default = ("now()"))
+  stop = Column(Time, nullable = False, server_default = ("now()"))
   length = Column(Integer, nullable = False, server_default = "0")
   date = Column(DATE, nullable = False, server_default = ("CURRENT_DATE"))
 
@@ -51,5 +51,5 @@ class Exercise(Base):
   type = Column(String, nullable = False, server_default = "exercise")
   repititions = Column(Integer, nullable = False, server_default = "10")
   weight = Column(Integer, nullable = False)
-  start = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
-  stop = Column(TIMESTAMP(timezone=True), nullable = False, server_default = ("now()"))
+  start = Column(Time, nullable = False, server_default = ("now()"))
+  stop = Column(Time, nullable = False, server_default = ("now()"))
