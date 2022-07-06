@@ -9,7 +9,7 @@ router = APIRouter(
   tags= ['Workouts']
 )
 
-@router.get('/', response_model=schemas.Workout)
+@router.get('/', response_model=List[schemas.Workout])
 def get_user_workouts(db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
   workouts = db.query(models.Workout).filter(models.Workout.user_id == current_user.id).all()
 

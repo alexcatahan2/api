@@ -84,8 +84,11 @@ class Workout(BaseModel):
   start: time
   stop:time
   length:int 
-  workout_id:int
+  id:int
   date: date
+
+  class Config:
+    orm_mode = True
 
 class WorkoutCreate(BaseModel):
   start: time
