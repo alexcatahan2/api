@@ -1,8 +1,8 @@
-"""adding user_id column to exercise table
+"""adding users_id to exercise table
 
-Revision ID: 0d0650d2de3c
-Revises: ef1c869becaf
-Create Date: 2022-07-04 13:28:48.505608
+Revision ID: f03b4261ab21
+Revises: 6be693d1d22a
+Create Date: 2022-07-06 20:46:01.703090
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0d0650d2de3c'
-down_revision = 'ef1c869becaf'
+revision = 'f03b4261ab21'
+down_revision = '6be693d1d22a'
 branch_labels = None
 depends_on = None
 
