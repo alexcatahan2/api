@@ -14,6 +14,11 @@ def get_user_exercises(db: Session = Depends(get_db), current_user : int = Depen
   exercises = db.query(models.Exercise).filter(models.Exercise.user_id == current_user.id).all()
   return exercises
 
+@router.get('/{workoutID}')
+def get_workouts_exercises(workoutID : int, db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
+  exerices = db.query(models.Exercise).filter(models.Exercise.workout_id == workoutID).all()
+  
+  return exerices
 @router.post('/')
 def create_exercise(exercise: schemas.ExerciseCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
   created_exercise = models.Exercise(user_id = current_user.id, **exercise.dict())
