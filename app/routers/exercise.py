@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from .. import models, schemas, utils, oauth2
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from typing import List
@@ -17,8 +18,15 @@ def get_user_exercises(db: Session = Depends(get_db), current_user : int = Depen
 @router.get('/{workoutID}')
 def get_workouts_exercises(workoutID : int, db: Session = Depends(get_db), current_user : int = Depends(oauth2.get_current_user)):
   exerices = db.query(models.Exercise).filter(models.Exercise.workout_id == workoutID).all()
-  
+
   return exerices
+
+@router.get('/sets/{workoutID}')
+def get_exercise_sets(workoutID: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+  sets = db.query(models.Exercise, func.count(models.Exercise.type).label('sets')).group_by(models.Exercise.type).all()
+  return sets
+
+
 @router.post('/')
 def create_exercise(exercise: schemas.ExerciseCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
   created_exercise = models.Exercise(user_id = current_user.id, **exercise.dict())
