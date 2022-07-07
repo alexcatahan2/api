@@ -83,7 +83,7 @@ class Workout(BaseModel):
   user_id: int
   start: time
   stop:time
-  length:int 
+  length:time 
   id:int
   date: date
 
@@ -93,7 +93,7 @@ class Workout(BaseModel):
 class WorkoutCreate(BaseModel):
   start: time
   stop: time
-  length: int
+  length: time
 
   class Config:
     orm_mode = True
